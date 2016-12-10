@@ -14,5 +14,6 @@ public class playerMovement : MonoBehaviour {
 		transform.Translate(x, 0, z);
 
 
+
 	}
 }
