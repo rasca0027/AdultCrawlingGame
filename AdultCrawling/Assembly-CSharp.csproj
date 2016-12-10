@@ -45,10 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AttractsPlayer.cs" />
      <Compile Include="Assets\GoalChecking.cs" />
      <Compile Include="Assets\Timer.cs" />
      <Compile Include="Assets\mouseLook.cs" />
      <Compile Include="Assets\playerMovement.cs" />
+     <Compile Include="Assets\startScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

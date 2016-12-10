@@ -5,10 +5,10 @@ using System.Collections;
 public class Timer : MonoBehaviour {
 	
 	float timer;
-	bool isPlaying;
+	bool isPlaying = false;
 
 	void Start() {
-		isPlaying = true;
+		
 	}
 
 
@@ -19,6 +19,10 @@ public class Timer : MonoBehaviour {
 			timer += Time.deltaTime;
 			GetComponent<Text> ().text = timer.ToString ("F2");
 		}
+	}
+
+	public void startTimimg() {
+		isPlaying = true;
 	}
 
 	public void stopTiming() {
