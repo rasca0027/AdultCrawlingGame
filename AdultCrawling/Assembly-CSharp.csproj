@@ -45,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GoalChecking.cs" />
+     <Compile Include="Assets\Timer.cs" />
      <Compile Include="Assets\mouseLook.cs" />
      <Compile Include="Assets\playerMovement.cs" />
  <Reference Include="UnityEngine.UI">

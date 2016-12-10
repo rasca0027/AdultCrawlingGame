@@ -1,9 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\mouseLook.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\playerMovement.cs">
     <Files>
-      <File FileName="Assets\playerMovement.cs" Line="14" Column="29" />
+      <File FileName="Assets\playerMovement.cs" Line="11" Column="60" />
       <File FileName="Assets\mouseLook.cs" Line="23" Column="32" />
+      <File FileName="Assets\GoalChecking.cs" Line="10" Column="44" />
+      <File FileName="Assets\Timer.cs" Line="26" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
