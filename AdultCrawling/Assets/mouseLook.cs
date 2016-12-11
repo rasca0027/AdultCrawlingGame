@@ -18,7 +18,11 @@ using System.Collections;
 public class mouseLook : MonoBehaviour
 {
 
-    public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
+	public Transform[] targets;
+	public float rotateSpeed = 90;
+	public GameObject Player;
+
+	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
     public float sensitivityX = 5F;
     public float sensitivityY = 5F;
@@ -32,13 +36,35 @@ public class mouseLook : MonoBehaviour
     float rotationX = 0F;
     float rotationY = 0F;
 
+	float targetDetectDistance = 5F;
+	Vector3 originalDir;
+
+	bool nearedTarget = false;
+
     Quaternion originalRotation;
 
     void Update()
     {
-        if (axes == RotationAxes.MouseXAndY)
+		int closestTargetIndex = getClosestTarget ();
+		float distance = getDistance (closestTargetIndex);
+		if (distance < targetDetectDistance) {
+			if (distance < targetDetectDistance - 0.1) {
+				originalDir = Player.transform.forward;
+				lookAway (closestTargetIndex);
+//				Player.transform.position.x
+//				nearedTarget = true;
+			} else {
+				// look back;
+//				Quaternion q = Quaternion.LookRotation(originalDir);
+//				transform.rotation = Quaternion.RotateTowards(transform.rotation, q, Time.deltaTime * rotateSpeed);
+				lookBack(originalDir);
+//				nearedTarget = false;
+			}
+		}
+
+		else if (axes == RotationAxes.MouseXAndY)
         {
-            // Read the mouse input axis
+			// Read the mouse input axis
             rotationX += Input.GetAxis("Mouse X") * sensitivityX;
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 
@@ -74,6 +100,8 @@ public class mouseLook : MonoBehaviour
         if (GetComponent<Rigidbody>())
             GetComponent<Rigidbody>().freezeRotation = true;
         originalRotation = transform.localRotation;
+		Player = GameObject.Find("Player");
+		originalDir = Player.transform.forward;
     }
 
     public static float ClampAngle(float angle, float min, float max)
@@ -84,4 +112,36 @@ public class mouseLook : MonoBehaviour
             angle -= 360F;
         return Mathf.Clamp(angle, min, max);
     }
+
+	private void lookAway (int closestObjectIndex) {
+		Vector3 lookDir = targets[closestObjectIndex].position - transform.position;
+		Quaternion q = Quaternion.LookRotation(lookDir);
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, q, Time.deltaTime * rotateSpeed);
+
+//
+//		if (Input.GetKeyDown (KeyCode.B)) {
+//			currTarget = (currTarget + 1) % targets.Length;
+//		}
+	}
+
+	private void lookBack (Vector3 originalDir) {
+		Vector3 lookDir = originalDir - transform.position;
+		Quaternion q = Quaternion.LookRotation(lookDir);
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, q, Time.deltaTime * rotateSpeed);
+	}
+
+	private int getClosestTarget () {
+		float minDistance = Vector3.Distance (Player.transform.position, targets [0].transform.position);
+		int min = 0;
+		for (int i = 0; i < targets.Length; i++) {
+			if (Vector3.Distance (Player.transform.position, targets [i].transform.position) < minDistance) {
+				min = i;
+			}
+		}
+		return min;
+	}
+
+	private float getDistance (int targetIndex) {
+		return Vector3.Distance (Player.transform.position, targets [targetIndex].transform.position);
+	}
 }

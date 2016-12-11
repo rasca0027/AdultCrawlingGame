@@ -13,6 +13,7 @@ public class addForce : MonoBehaviour {
 
 	}   
 	void OnTriggerEnter() {
+		Debug.Log ("aaaa");
 		GameObject.Find ("Player").GetComponent<Rigidbody> ().AddForce (transform.forward * thrust);
 	}   
 
