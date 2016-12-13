@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GoalChecking : MonoBehaviour {
@@ -8,6 +9,7 @@ public class GoalChecking : MonoBehaviour {
 		if (thing.name == "Player") {
 			// win
 			timer.GetComponent<Timer>().stopTiming();
+			GameObject.Find ("/Canvas/WinText").GetComponent<Text> ().text = "You win";
 		}
 	}
 }
